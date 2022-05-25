@@ -1,0 +1,25 @@
+
+
+.container{
+    display: grid;
+    grid-template-columns: 100px 100px 100px;
+    grid-template-columns: 100px 100px 100px;
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.ox {
+    margin: 0 auto;
+    background-color: gray;
+    border: none;
+    width: 50px;
+    height: 50px;
+    font-size: larger;
+    color: floralwhite;
+}
+
+.ox:hover{
+    background-color: darkkhaki;
+}
