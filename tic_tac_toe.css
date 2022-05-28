@@ -22,10 +22,14 @@
     height: 50px;
     font-size: larger;
     color: floralwhite;
+    /*アニメーション*/
+    transition: border-radius 0.25s, transform 0.5s;
 }
 
 .ox:hover{
     background-color: rgb(159, 233, 169);
+    border-radius: 50%;
+    transform: rotate(180deg);
 }
 
 #show_win{

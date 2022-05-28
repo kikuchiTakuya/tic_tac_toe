@@ -1,5 +1,8 @@
 'use strict;'
 
+// ゲーム中かどうかを確認するフラグ
+let is_play = true
+
 // セル管理配列
 let cell_array = [[0,0,0], [0,0,0], [0,0,0]]
 
@@ -22,11 +25,15 @@ const btn_20 = document.getElementById("20")
 const btn_21 = document.getElementById("21")
 const btn_22 = document.getElementById("22")
 
+// 勝敗表示要素
+const show_win = document.getElementById("show_win")
+
 // セルをクリックした時の処理
 function cellClick(e,y,x){
-    if(cell_array[y][x] === 0){
+    if(is_play == true && cell_array[y][x] === 0){
+        // ゲーム中かつ
         // セルがまだクリックされていない場合は処理をする
-        e.innerText = "〇"
+        e.innerText = ""
         cellMark(y,x)
         cellBgColorChange(e)
         
@@ -38,6 +45,8 @@ function cellClick(e,y,x){
             trun_flag = 1
         }
     }
+    // 勝敗確認
+    checkCellWin()
 
 }
 
@@ -48,7 +57,6 @@ function cellMark(y,x){
     } else {
         cell_array[y][x] = 2
     }
-    console.log(cell_array)
 }
 
 // セルの背景を変更する
@@ -58,6 +66,7 @@ function cellBgColorChange(e){
     } else {
         e.style.backgroundColor = 'rgb(20, 220, 220)'
     }
+    e.style.borderRadius = "50%"
 }
 
 // ターン表示の変更
@@ -66,7 +75,57 @@ function change_show_turn(player, r, g, b){
     show_turn.style.color = "rgb(" + String(r)+ "," + String(g) + "," + String(b) + ")"
 }
 
+// 勝敗確認
+function checkCellWin(){
+    // 横確認
+    cell_array.forEach(line => {
+        if(line[0] == line[1] && line[1] == line[2]){
+            if(line[0] == 1){
+                outputShowWin(1)
+            } else if(line[0] == 2){
+                outputShowWin(2)
+            }
+        }
+    })
 
+    // 縦確認
+    for(let i = 0; i < cell_array[0].length; i++){
+        if(cell_array[0][i] == cell_array[1][i] && cell_array[1][i] == cell_array[2][i]){
+            if(cell_array[0][i] == 1){
+                outputShowWin(1)
+            } else if(cell_array[0][i] == 2){
+                outputShowWin(2)
+            }
+        }
+    }
+
+    // 斜め確認00->22
+    if(cell_array[0][0] == cell_array[1][1] && cell_array[1][1] == cell_array[2][2]){
+        if(cell_array[0][0] == 1){
+            outputShowWin(1)
+        } else if(cell_array[0][0] == 2){
+            outputShowWin(2)
+        }
+    }
+
+    // 斜め確認02->20
+    if(cell_array[0][2] == cell_array[1][1] && cell_array[1][1] == cell_array[2][0]){
+        if(cell_array[0][2] == 1){
+            outputShowWin(1)
+        } else if(cell_array[0][2] == 2){
+            outputShowWin(2)
+        }
+    }
+}
+
+// 勝敗表示
+function outputShowWin(winner){
+    show_win.innerText = String(winner) + "P" + " " +"Win"
+    // 勝敗がついているのでプレイできないようにする
+    is_play = false
+}
+
+// ボタンクリックした時の動作を設定
 btn_00.addEventListener('click', function(){
     cellClick(btn_00,0,0)
 })
