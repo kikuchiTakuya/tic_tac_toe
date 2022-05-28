@@ -23,7 +23,7 @@
     font-size: larger;
     color: floralwhite;
     /*アニメーション*/
-    transition: border-radius 0.25s, transform 0.5s;
+    transition: background-color 0.5s, border-radius 0.25s, transform 0.5s;
 }
 
 .ox:hover{
