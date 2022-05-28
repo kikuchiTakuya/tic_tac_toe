@@ -13,6 +13,12 @@ let trun_flag = 1
 const show_turn = document.getElementById("show_turn")
 show_turn.style.color = 'rgb(220, 200, 20)'
 
+// 効果音
+let click_sound = new Audio()
+click_sound.src = "./sound/click.mp3"
+let hover_sound = new Audio()
+hover_sound.src = "./sound/hover.mp3"
+
 
 // セルのボタンオブジェクト
 const btn_00 = document.getElementById("00")
@@ -25,8 +31,14 @@ const btn_20 = document.getElementById("20")
 const btn_21 = document.getElementById("21")
 const btn_22 = document.getElementById("22")
 
+
 // 勝敗表示要素
 const show_win = document.getElementById("show_win")
+
+// リプレイボタン
+const replay = document.getElementById("replay")
+replay.style.opacity = 0 // ゲーム終了するまで非表示
+
 
 // セルをクリックした時の処理
 function cellClick(e,y,x){
@@ -44,6 +56,7 @@ function cellClick(e,y,x){
             change_show_turn("1P", 200, 200, 20)
             trun_flag = 1
         }
+        click_sound.play()
     }
     // 勝敗確認
     checkCellWin()
@@ -116,13 +129,44 @@ function checkCellWin(){
             outputShowWin(2)
         }
     }
+
+    // 引き分け確認
+    let isZero = false
+    for(let i = 0; i < cell_array[0].length; i++){
+        for(let j = 0; j < cell_array[0].length; j++){
+            if(cell_array[i][j] == 0){
+                isZero = true
+            }
+        }
+        if(isZero == true){
+            break
+        }
+    }
+    if(isZero == false){
+        outputShowWin(3)
+    }
 }
 
 // 勝敗表示
 function outputShowWin(winner){
-    show_win.innerText = String(winner) + "P" + " " +"Win"
+    if(is_play == true){
+        // 勝敗表示を1回のみ行う
+        if(winner == 1){
+            show_win.innerText = String(winner) + "P" + " " +"Win"
+            show_win.style.color = "rgb(220, 200, 20)"
+        } else if(winner == 2){
+            show_win.innerText = String(winner) + "P" + " " +"Win"
+            show_win.style.color = "rgb(20, 200, 220)"
+        } else {
+            // 引き分け
+            show_win.innerText = "Draw"
+            show_win.style.color = "rgb(255, 255, 255)"
+        }
+    }
     // 勝敗がついているのでプレイできないようにする
     is_play = false
+    // リプレイボタンを表示
+    replay.style.opacity = 1
 }
 
 // ボタンクリックした時の動作を設定
@@ -152,4 +196,9 @@ btn_21.addEventListener('click', function(){
 })
 btn_22.addEventListener('click', function(){
     cellClick(btn_22, 2, 2)
+})
+
+// リプレイボタンの挙動
+replay.addEventListener('click', function(){
+    location.reload()
 })
