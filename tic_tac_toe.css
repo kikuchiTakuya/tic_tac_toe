@@ -60,11 +60,12 @@ body{
     border: none;
     /* background-color: darkgray; */
     font-size: xx-large;
-    transition: background-color 0.8s;
+    transition: background-color 0.8s, color 0.8s, box-shadow 0.8s;
 }
 
 #replay:hover{
     background-color: rgb(214, 212, 68);
     color: rgb(54, 53, 53);
+    box-shadow: 0px 0px 20px 5px rgb(206, 226, 93);
     cursor: pointer;
 }
