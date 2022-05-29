@@ -1,5 +1,6 @@
 body{
     background-color: rgb(22, 21, 21);
+    cursor: none;
 }
 
 #show_turn{
@@ -35,7 +36,7 @@ body{
     border: none;
     border-radius: 50%;
     transform: rotate(180deg);
-    cursor: pointer;
+    cursor: none;
 }
 
 .result{
@@ -67,5 +68,19 @@ body{
     background-color: rgb(214, 212, 68);
     color: rgb(54, 53, 53);
     box-shadow: 0px 0px 20px 5px rgb(206, 226, 93);
-    cursor: pointer;
+    cursor: none;
+}
+
+#pointer{
+    top: -10px;
+    left: -10px;
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(213, 235, 18, 0.384);
+    box-shadow: 0px 0px 20px 5px rgba(255, 255, 0, 0.5),
+                0px 0px 40px 5px rgba(255, 255, 0, 0.5);
+    translate: (0,0);
+    pointer-events: none;
 }

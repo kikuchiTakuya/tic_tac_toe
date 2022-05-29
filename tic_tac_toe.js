@@ -39,6 +39,9 @@ const show_win = document.getElementById("show_win")
 const replay = document.getElementById("replay")
 replay.style.opacity = 0 // ゲーム終了するまで非表示
 
+// ポインター
+const pointer = document.getElementById("pointer")
+
 
 // セルをクリックした時の処理
 function cellClick(e,y,x){
@@ -201,4 +204,9 @@ btn_22.addEventListener('click', function(){
 // リプレイボタンの挙動
 replay.addEventListener('click', function(){
     location.reload()
+})
+
+// ポインター
+document.addEventListener('mousemove', (e) => {
+    pointer.style.transform = 'translate(' + e.clientX + 'px, ' + e.clientY + 'px)'
 })
